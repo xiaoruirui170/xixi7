@@ -1,0 +1,626 @@
+/* 配色方案定义 */
+:root {
+    /* 默认配色方案 (红绿) */
+    --primary-color: #d32f2f;
+    --secondary-color: #388e3c;
+    --background-gradient: linear-gradient(135deg, #ffebee 0%, #e8f5e8 100%);
+    --sidebar-gradient: linear-gradient(to bottom, #d32f2f 0%, #388e3c 100%);
+    --header-gradient: linear-gradient(to right, #d32f2f 0%, #388e3c 100%);
+    --footer-gradient: linear-gradient(to right, #d32f2f 0%, #388e3c 100%);
+    --button-gradient: linear-gradient(45deg, #d32f2f, #388e3c);
+    --text-color: #2d0000;
+    --border-color: rgba(211, 47, 47, 0.2);
+    --highlight-color: #ffd700;
+}
+
+/* 柔和色配色方案 (浅蓝+浅绿) */
+body[data-color-scheme="pastel"] {
+    --primary-color: #4fc3f7;
+    --secondary-color: #81c784;
+    --background-gradient: linear-gradient(135deg, #e1f5fe 0%, #e8f5e9 100%);
+    --sidebar-gradient: linear-gradient(to bottom, #4fc3f7 0%, #81c784 100%);
+    --header-gradient: linear-gradient(to right, #4fc3f7 0%, #81c784 100%);
+    --footer-gradient: linear-gradient(to right, #4fc3f7 0%, #81c784 100%);
+    --button-gradient: linear-gradient(45deg, #4fc3f7, #81c784);
+    --text-color: #004d40;
+    --border-color: rgba(79, 195, 247, 0.2);
+    --highlight-color: #ffb74d;
+}
+
+/* 鲜艳色配色方案 (红绿) */
+body[data-color-scheme="vibrant"] {
+    --primary-color: #d32f2f;
+    --secondary-color: #388e3c;
+    --background-gradient: linear-gradient(135deg, #ffebee 0%, #e8f5e8 100%);
+    --sidebar-gradient: linear-gradient(to bottom, #d32f2f 0%, #388e3c 100%);
+    --header-gradient: linear-gradient(to right, #d32f2f 0%, #388e3c 100%);
+    --footer-gradient: linear-gradient(to right, #d32f2f 0%, #388e3c 100%);
+    --button-gradient: linear-gradient(45deg, #d32f2f, #388e3c);
+    --text-color: #2d0000;
+    --border-color: rgba(211, 47, 47, 0.2);
+    --highlight-color: #ffd700;
+}
+
+/* 单色配色方案 (浅绿) */
+body[data-color-scheme="monochrome"] {
+    --primary-color: #66bb6a;
+    --secondary-color: #81c784;
+    --background-gradient: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    --sidebar-gradient: linear-gradient(to bottom, #66bb6a 0%, #81c784 100%);
+    --header-gradient: linear-gradient(to right, #66bb6a 0%, #81c784 100%);
+    --footer-gradient: linear-gradient(to right, #66bb6a 0%, #81c784 100%);
+    --button-gradient: linear-gradient(45deg, #66bb6a, #81c784);
+    --text-color: #1b5e20;
+    --border-color: rgba(102, 187, 106, 0.2);
+    --highlight-color: #ffd54f;
+}
+
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background: var(--background-gradient);
+    display: grid;
+    grid-template-areas:
+        "sidebar header header"
+        "sidebar main main"
+        "sidebar footer footer";
+    grid-template-columns: 280px 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    gap: 0;
+}
+
+/* 侧边栏样式 */
+.sidebar {
+    grid-area: sidebar;
+    background: var(--sidebar-gradient);
+    color: white;
+    padding: 2rem 1.5rem;
+    position: relative;
+    overflow-y: auto;
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    background: linear-gradient(45deg, var(--highlight-color), #ffed4e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 导航样式 */
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav li {
+    margin-bottom: 0.8rem;
+}
+
+.sidebar-nav a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    transition: all 0.4s ease;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(8px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-nav a:hover::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.4), transparent);
+    animation: gold-shimmer 1.5s ease-in-out;
+}
+
+@keyframes gold-shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.sidebar-nav a.active {
+    background: rgba(255, 215, 0, 0.3);
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+/* 头部样式 */
+header {
+    grid-area: header;
+    background: var(--header-gradient);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header p {
+    font-size: 1.2rem;
+    opacity: 0.95;
+}
+
+/* 主内容区域 */
+main {
+    grid-area: main;
+    padding: 2rem;
+    background: var(--background-gradient);
+    box-shadow: 0 0 20px var(--border-color);
+    border-radius: 0 0 20px 0;
+}
+
+/* 图表容器 */
+#chart-container {
+    margin-bottom: 2rem;
+    background: var(--background-gradient);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 25px var(--border-color);
+    border: 1px solid var(--border-color);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 1rem;
+}
+
+.chart-controls button {
+    background: var(--button-gradient);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 0.8rem;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 15px var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.chart-controls button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--border-color);
+}
+
+.chart-controls button:hover::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+    animation: gold-shimmer 1s ease-in-out;
+}
+
+.chart-wrapper {
+    position: relative;
+    height: 450px;
+    margin-bottom: 1.5rem;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    background: white;
+    box-shadow: inset 0 0 20px var(--border-color);
+}
+
+.chart-description {
+    background: var(--background-gradient);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 6px solid var(--primary-color);
+    box-shadow: 0 4px 15px var(--border-color);
+}
+
+/* 数据面板 */
+#data-panel {
+    background: var(--background-gradient);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px var(--border-color);
+    border: 1px solid var(--border-color);
+    margin-top: 2rem;
+}
+
+.data-table-container {
+    max-height: 350px;
+    overflow-y: auto;
+    margin: 1.5rem 0;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: inset 0 0 15px var(--border-color);
+}
+
+#data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+#data-table th,
+#data-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#data-table th {
+    background: var(--button-gradient);
+    color: white;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+}
+
+#data-table tr:hover {
+    background-color: var(--border-color);
+    transform: scale(1.01);
+    transition: all 0.3s ease;
+}
+
+.data-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.data-controls button {
+    background: var(--button-gradient);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 15px var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.data-controls button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--border-color);
+}
+
+.data-controls button:hover::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+    animation: gold-shimmer 1s ease-in-out;
+}
+
+.data-controls button:disabled {
+    background: linear-gradient(45deg, #bdbdbd, #9e9e9e);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 删除多余的侧边栏样式，因为我们已经在侧边栏选项中定义了样式 */
+
+/* 页脚 */
+footer {
+    grid-area: footer;
+    background: var(--footer-gradient);
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+footer p {
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* 侧边栏选项样式 */
+.sidebar-options {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-options h3 {
+    color: var(--highlight-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.3rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar .option-group {
+    margin-bottom: 1.5rem;
+}
+
+.sidebar .option-group label {
+    color: white;
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.sidebar .option-group select,
+.sidebar .option-group input[type="range"] {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.sidebar .option-group select option {
+    background-color: #2d0000;
+    color: white;
+}
+
+.sidebar .option-group.checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.sidebar .option-group.checkbox label {
+    margin-bottom: 0;
+    margin-left: 0.5rem;
+    cursor: pointer;
+}
+
+/* 响应式设计 */
+@media (max-width: 992px) {
+    body {
+        grid-template-areas:
+            "header header"
+            "sidebar sidebar"
+            "main main"
+            "footer footer";
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto 1fr auto;
+    }
+    
+    .sidebar {
+        padding: 1rem;
+    }
+    
+    .sidebar-nav ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .sidebar-nav li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .sidebar-nav a {
+        padding: 0.8rem;
+        text-align: center;
+    }
+    
+    .sidebar-options {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        grid-template-areas:
+            "header"
+            "sidebar"
+            "main"
+            "footer";
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar-nav ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    header p {
+        font-size: 1rem;
+    }
+
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .chart-controls {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .chart-controls button {
+        margin-left: 0;
+        margin-right: 0;
+        flex: 1;
+        min-width: 120px;
+    }
+    
+    .data-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .data-controls button {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+/* 编辑模式样式 */
+#data-panel.edit-mode {
+    border: 2px solid #ffc107;
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
+    background: linear-gradient(135deg, #fff8e1 0%, #fff3e0 100%);
+}
+
+#data-panel.edit-mode h3 {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+#data-panel.edit-mode .editable {
+    background-color: #fff8e1;
+    border: 1px dashed #ffc107;
+    padding: 2px;
+    cursor: text;
+    min-height: 30px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#data-panel.edit-mode .editable:focus {
+    background-color: #fff3e0;
+    border: 1px solid #ff9800;
+    box-shadow: 0 0 5px rgba(255, 152, 0, 0.5);
+}
+
+#data-panel.edit-mode .editable:hover {
+    background-color: #ffecb3;
+}
+
+/* 编辑模式按钮状态 */
+#data-panel.edit-mode + .data-controls button:not(:disabled) {
+    background: linear-gradient(45deg, #ff9800, #ff5722);
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+}
+
+#data-panel.edit-mode + .data-controls button:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.6);
+}
+
+/* 动画效果 */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 工具提示 */
+.tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    z-index: 100;
+    pointer-events: none;
+}
+
+/* 加载动画 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #1e88e5;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 数据标签样式 */
+.data-label {
+    position: absolute;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 2px 4px;
+    border-radius: 2px;
+    pointer-events: none;
+}
+
+/* 图表切换动画 */
+.chart-transition {
+    transition: all 0.5s ease;
+}
+
+/* 高亮效果 */
+.highlight {
+    animation: highlight 1s ease;
+}
+
+@keyframes highlight {
+    0% { background-color: rgba(255, 235, 59, 0.5); }
+    100% { background-color: transparent; }
+}

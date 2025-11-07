@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据可视化交互网站</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 引入Chart.js库 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>数据可视化交互展示</h1>
+    </header>
+
+    <div class="sidebar">
+        <h2>图表类型</h2>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#line-chart" class="active" data-chart="line">📈 折线图</a></li>
+                <li><a href="#bar-chart" data-chart="bar">📊 柱形图</a></li>
+                <li><a href="#horizontal-bar" data-chart="horizontalBar">📋 条形图</a></li>
+                <li><a href="#area-chart" data-chart="area">⛰️ 堆积面积图</a></li>
+                <li><a href="#histogram" data-chart="histogram">📏 直方图</a></li>
+                <li><a href="#pie-chart" data-chart="pie">🥧 饼图</a></li>
+                <li><a href="#scatter-chart" data-chart="scatter">✨ 散点图</a></li>
+                <li><a href="#box-plot" data-chart="boxplot">📦 箱形图</a></li>
+                <li><a href="#radar-chart" data-chart="radar">🛰️ 雷达图</a></li>
+                <li><a href="#error-bar" data-chart="errorBar">⚠️ 误差棒图</a></li>
+            </ul>
+        </nav>
+        
+        <div class="sidebar-options">
+            <h3>选项设置</h3>
+            <div class="option-group">
+                <label for="animation-speed">动画速度:</label>
+                <input type="range" id="animation-speed" min="0" max="2000" step="100" value="1000">
+            </div>
+            <div class="option-group checkbox">
+                <input type="checkbox" id="show-legend" checked>
+                <label for="show-legend">显示图例</label>
+            </div>
+            <div class="option-group checkbox">
+                <input type="checkbox" id="show-grid" checked>
+                <label for="show-grid">显示网格</label>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section id="chart-container">
+            <div class="chart-header">
+                <h2 id="chart-title">未来15天最高气温和最低气温</h2>
+                <div class="chart-controls">
+                    <button id="download-chart">下载图表</button>
+                </div>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="chart"></canvas>
+            </div>
+            <div class="chart-description">
+                <h3>图表说明</h3>
+                <p id="chart-desc">这是一个折线图示例，展示了未来15天的最高气温和最低气温变化趋势。</p>
+            </div>
+        </section>
+
+        <section id="data-panel">
+            <h3>数据面板</h3>
+            <div class="data-table-container">
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>最高气温</th>
+                            <th>最低气温</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 数据将通过JavaScript动态填充 -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="data-controls">
+                <button id="edit-data">编辑数据</button>
+                <button id="apply-changes" disabled>应用更改</button>
+                <button id="reset-data" disabled>重置数据</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&nbsp;</p>
+    </footer>
+
+    <!-- 引入自定义JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/charts-utils.js"></script>
+    <script src="js/charts-tables.js"></script>
+    <script src="js/charts-events.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
